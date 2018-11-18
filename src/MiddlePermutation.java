@@ -43,7 +43,7 @@ public class MiddlePermutation {
                 fact = fact.remainder(fact.multiply(new BigInteger("2")).divide(new BigInteger(Integer.toString(n))));        //fact %= (fact * 2 / n);
                 n--;
             } else {
-                i = fact.divide(fact.multiply(new BigInteger("2")).divide(new BigInteger(Integer.toString(n)))).intValue();     //i = (int) (fact / (fact * 2 / n)) - 1;
+                i = fact.divide(fact.multiply(new BigInteger("2")).divide(new BigInteger(Integer.toString(n)))).intValue() - 1;     //i = (int) (fact / (fact * 2 / n)) - 1;
                 result.append(str.charAt(i));
                 String temp = str.substring(0, i) + str.substring(i + 1);
                 for (int j = temp.length() - 1; j >=0; j--) {
@@ -59,6 +59,6 @@ public class MiddlePermutation {
         if (x.intValue() == 1)
             return new BigInteger("1");
         else
-            return x.multiply(factorial(x.subtract(new BigInteger("1"))).negate());
+            return x.multiply(factorial(x.add(new BigInteger("1").negate())));
     }
 }
