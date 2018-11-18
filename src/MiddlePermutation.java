@@ -28,10 +28,6 @@ public class MiddlePermutation {
     }
 
     private static void findMidPerm(String str, int n) {
-        if (n == 2) {
-            result.append(str.charAt(1)).append(str.charAt(0));
-            isFound = true;
-        }
         if (isFound)
             return;
         else {
