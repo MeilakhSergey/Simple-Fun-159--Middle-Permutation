@@ -1,9 +1,11 @@
 import java.util.Arrays;
+import java.util.Collections;
 
 public class MiddlePermutation {
-    private static String result;
+    private static StringBuilder result;
+    private static boolean isFound;
     private static long fact;
-    private static long count;
+    private static int n;
     public static void main(String[] args) {
         System.out.println(findMidPerm("abc"));
         System.out.println(findMidPerm("abcd"));
@@ -17,24 +19,37 @@ public class MiddlePermutation {
         char[] orderArray = strng.toCharArray();
         Arrays.sort(orderArray);
         strng = new String(orderArray);
-        fact = factorial(orderArray.length);
-        count = 0;
-        findMidPerm("", strng);
-        return result;
+        result = new StringBuilder();
+        isFound = false;
+        fact = factorial(orderArray.length) / 2;
+        n = orderArray.length;
+        findMidPerm(strng, n);
+        return result.toString();
     }
-    private static void findMidPerm(String prefix, String str) {
-        int n = str.length();
-        if (n == 0)
-            count++;
-        else
-            for (int i = 0; i < n; i++) {
-                findMidPerm(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1));
-                if (count == fact / 2) break;
+
+    private static void findMidPerm(String str, int n) {
+        if (isFound)
+            return;
+        else {
+            int i;
+            if (fact % (fact * 2 / n) != 0) {
+                i = (int) (fact / (fact * 2 / n));
+                result.append(str.charAt(i));
+                fact %= (fact * 2 / n);
+                n--;
+            } else {
+                i = (int) (fact / (fact * 2 / n)) - 1;
+                result.append(str.charAt(i));
+                String temp = str.substring(0, i) + str.substring(i + 1);
+                for (int j = temp.length() - 1; j >=0; j--) {
+                    result.append(temp.charAt(j));
+                }
+                isFound = true;
             }
-        if (count == fact / 2 && n == 0) {
-            result = prefix;
+            findMidPerm(str.substring(0, i) + str.substring(i + 1), n);
         }
     }
+
     private static long factorial(long x) {
         if (x == 1)
             return 1;
