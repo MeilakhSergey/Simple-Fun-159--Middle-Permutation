@@ -1,15 +1,16 @@
 import java.util.Arrays;
 
 public class MiddlePermutation {
-    static String result;
-    static long fact;
-    static long count;
+    private static String result;
+    private static long fact;
+    private static long count;
     public static void main(String[] args) {
         System.out.println(findMidPerm("abc"));
         System.out.println(findMidPerm("abcd"));
         System.out.println(findMidPerm("abcdx"));
         System.out.println(findMidPerm("abcdxg"));
         System.out.println(findMidPerm("abcdxgz"));
+        System.out.println(findMidPerm("obwetzmafglcsxvhu"));
     }
 
     public static String findMidPerm(String strng) {
